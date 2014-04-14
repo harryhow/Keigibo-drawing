@@ -2,7 +2,10 @@
 
 #include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
+#include "ofxSimpleSerial.h"
 
+
+using namespace std;
 
 class testApp : public ofBaseApp{
 
@@ -20,6 +23,7 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void onNewMessage(string & message);
     
     
         ofPolyline line;
@@ -29,5 +33,11 @@ class testApp : public ofBaseApp{
         //this is our model we'll draw
         ofxAssimpModelLoader model;
         ofLight light;
+    
+        // serial
+        ofxSimpleSerial	serial;
+        string		message;
+        bool		remember;
+        bool		requestRead;
 		
 };

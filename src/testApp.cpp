@@ -1,5 +1,19 @@
 #include "testApp.h"
+//
+//#include <GLkit/GLKMath.h>
+//#include <GLKit/GLKQuaternion.h>
+//#include <GLKit/GLKMathTypes.h>
 
+
+
+
+bool gotFirstDataByte = false;
+int aligned = 0;
+int serialCount = 0;
+char* teapotPacket;
+float* q;
+ofQuaternion quaternion;
+float angleQua, xQua, yQua, zQua;
 
 
 
@@ -23,11 +37,109 @@ void testApp::setup(){
 	model.setPosition(ofGetWidth()* .5, ofGetHeight() *.5, 0);
 	
 	light.enable();
+    
+//// setup serial port
+    
+    serial.setup("/dev/tty.usbmodem1421", 38400); //be ware of device path
+    
+    ofAddListener(serial.NEW_MESSAGE,this,&testApp::onNewMessage);
+	message = "";
+    requestRead = true;
+
+    
+    // init token for hardware, maybe not necessary?
+    serial.writeByte('r');
+    serial.writeByte('r');
+    serial.writeByte('r');
+    
+
+	serial.startContinuousRead();
+    
+    teapotPacket = new char[14];
+    q = new float[4];
+    quaternion = ofQuaternion(1.0, 1.0, 1.0, 1.0);
 
 }
 
+void testApp::onNewMessage(string & message)
+{
+	cout << "onNewMessage, message: " << message << "\n";
+    
+    char ch;
+    
+    for (int i=0; i < message.size(); i++){
+        //cout << message[i] << "\n";
+        ch = message[i];
+        if(!gotFirstDataByte) {
+            if (ch == '$') {
+                cout << "GOT" << message[i] << "\n";
+                gotFirstDataByte = true;
+            } else {
+                return;
+            }
+        }
+        
+        
+        if (aligned < 4) {
+            // make sure we are properly aligned on a 14-byte packet
+            if (serialCount == 0) {
+                if (ch == '$') aligned++; else aligned = 0;
+            } else if (serialCount == 1) {
+                if (ch == 2) aligned++; else aligned = 0;
+            } else if (serialCount == 12) {
+                if (ch == '\r') aligned++; else aligned = 0;
+            } else if (serialCount == 13) {
+                if (ch == '\n') aligned++; else aligned = 0;
+            }
+            //println((char)ch + " " + aligned + " " + serialCount);
+            cout << (char)ch << " " << aligned << " " << serialCount << "\n";
+            serialCount++;
+            if (serialCount == 14) serialCount = 0;
+        } else {
+            if (serialCount > 0 || ch == '$') {
+                
+                 teapotPacket[serialCount++] = (char)ch;
+                
+                if (serialCount == 14) {
+                    serialCount = 0; // restart packet byte position
+                    cout << "CALCULATE quaternion" << "\n";
+                    
+                    q[0] = ((teapotPacket[2] << 8) | teapotPacket[3]) / 16384.0f;
+                    q[1] = ((teapotPacket[4] << 8) | teapotPacket[5]) / 16384.0f;
+                    q[2] = ((teapotPacket[6] << 8) | teapotPacket[7]) / 16384.0f;
+                    q[3] = ((teapotPacket[8] << 8) | teapotPacket[9]) / 16384.0f;
+                    for (int i = 0; i < 4; i++) if (q[i] >= 2) q[i] = -4 + q[i];
+                    
+                    // set our toxilibs quaternion to new data
+                    //quat.set(q[0], q[1], q[2], q[3]);
+                    quaternion = ofQuaternion(q[0], q[1], q[2], q[3]);
+                
+                }
+            }
+        }
+
+    }
+    
+    
+   
+	
+//	red = (message == "r");
+//	green = (message == "g");
+//	blue = (message == "b");
+}
+
+
+
 //--------------------------------------------------------------
 void testApp::update(){
+    
+
+//    if(requestRead)
+//    {
+//		serial.sendRequest();
+//		requestRead = false;
+//    }
+    
     
     float rotateX = 0;
     float rotateY = 0;
@@ -45,13 +157,32 @@ void testApp::update(){
     
     if (ofGetKeyPressed('C')) line.clear();
     
+    
+    //ofMatrix4x4 rotateMatrix;
+    //quaternion.getRotate(angleQua, xQua, yQua, zQua);
+    //quaternion.get(rotateMatrix);
+    //cout << "ANGLE:" <<  angleQua << " x:" << xQua << " y:" << yQua << " z:" << zQua << "\r";
+    
+    
+    //ofPushMatrix();
+    //ofRotate (angleQua, xQua, yQua, zQua);
+    quaternion.getRotate(angleQua, xQua, yQua, zQua);
+    line.addVertex(ofPoint(xQua,yQua));
+    ofClamp(zQua, -1, 1);
+    
+    rotateX = xQua;
+    rotateY = yQua;
+    rotateZ = zQua;
+    
     for (int i = 0; i < line.getVertices().size(); i++){
         ofPoint fromCenter = line.getVertices()[i] - ofPoint(ofGetWidth()/2, ofGetHeight()/2);
         ofMatrix4x4 rotateMatrix;
+        //quaternion.get(rotateMatrix);
         rotateMatrix.makeRotationMatrix(1, rotateX, rotateY, rotateZ);
         ofPoint rot = fromCenter * rotateMatrix + ofPoint(ofGetWidth()/2, ofGetHeight()/2);
         line.getVertices()[i] = rot;
     }
+    //ofPopMatrix();
 
 }
 
@@ -65,11 +196,11 @@ void testApp::draw(){
     vector < ofMesh > meshes;
     
     
-    for (int i = 0; i < 50; i++){
+    for (int i = 0; i < 40; i++){
         ofMesh line;
         line.setMode(OF_PRIMITIVE_LINE_STRIP);
         meshes.push_back(line);
-        transparency.push_back(  abs(ofSignedNoise(i / 10.0)) );
+        transparency.push_back(abs(ofSignedNoise(i / 10.0)));
     }
     
     
@@ -173,7 +304,6 @@ void testApp::draw(){
                                     
     ofPopMatrix();
 */
-    
 }
 
 //--------------------------------------------------------------
@@ -198,7 +328,7 @@ void testApp::mouseMoved(int x, int y ){
 void testApp::mouseDragged(int x, int y, int button){
 
     // suppy vertex by acceleration data
-    line.addVertex(ofPoint(x,y));
+    //line.addVertex(ofPoint(x,y));
 }
 
 //--------------------------------------------------------------
