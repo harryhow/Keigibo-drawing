@@ -1,3 +1,4 @@
 ofxAssimpModelLoader
 ofxCsv
 ofxSimpleSerial
+ofxOsc

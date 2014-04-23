@@ -3,6 +3,11 @@
 #include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
 #include "ofxSimpleSerial.h"
+#include "ofxOsc.h"
+
+// listen on port 5001
+#define PORT 12000
+#define NUM_MSG_STRINGS 20
 
 
 using namespace std;
@@ -25,8 +30,8 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
         void onNewMessage(string & message);
     
-    
         ofPolyline line;
+        //ofPolyline line2;
         vector < ofPolyline > lines;
 
     
@@ -35,9 +40,17 @@ class testApp : public ofBaseApp{
         ofLight light;
     
         // serial
-        ofxSimpleSerial	serial;
-        string		message;
+        //ofxSimpleSerial	serial;
+        string	message;
+       
         bool		remember;
         bool		requestRead;
-		
+        char*       teapotPacket;
+   		//char[] teapotPacket = new char[14];
+    
+        ofxOscReceiver receiver;
+        int current_msg_string;
+        string msg_strings[NUM_MSG_STRINGS];
+        float timers[NUM_MSG_STRINGS];
+
 };
