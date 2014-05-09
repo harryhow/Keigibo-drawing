@@ -2,3 +2,5 @@ ofxAssimpModelLoader
 ofxCsv
 ofxSimpleSerial
 ofxOsc
+ofxJSON
+ofxSkyBox

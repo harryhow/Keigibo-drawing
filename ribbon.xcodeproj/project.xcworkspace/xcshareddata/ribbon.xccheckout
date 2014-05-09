@@ -5,44 +5,52 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7B92E182-FD4C-46FC-91AF-C04EF4A087BD</string>
+	<string>E6B1B3B8-1A12-48EC-8A61-D0ABF4AA3730</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ribbon</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3C5EB9BF-B9CD-4D70-8042-AE1A265A7881</key>
-		<string>https://github.com/harryhow/Keigibo-drawing.git</string>
-		<key>CCE12000-3752-444B-8A67-C60AA11220EF</key>
-		<string>https://github.com/LeoColomb/ofxSimpleSerial</string>
-		<key>D02FD482-5EAC-46E2-97F5-47402D29AEE3</key>
+		<key>1A676251-659E-497A-9B32-AF3EC17DAD09</key>
 		<string>https://github.com/wrongentertainment/ofxCsv/</string>
+		<key>44ABB4FD-DE7E-4EDA-8761-1801C555C706</key>
+		<string>https://github.com/jefftimesten/ofxJSON</string>
+		<key>68E86071-3D47-415E-9E89-96FA1BAE81E5</key>
+		<string>https://github.com/kalwalt/ofxSkyBox</string>
+		<key>AF35746F-A448-4F82-82C1-FCC9B927D637</key>
+		<string>https://github.com/harryhow/Keigibo-drawing.git</string>
+		<key>D9C0AACF-B188-4070-812B-DA0DA0B8C89D</key>
+		<string>https://github.com/LeoColomb/ofxSimpleSerial</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>lib/of_v0.8.1_osx_release/examples/drawingWorkshop/ribbon/ribbon.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3C5EB9BF-B9CD-4D70-8042-AE1A265A7881</key>
-		<string>../..</string>
-		<key>689A18B2-4523-43F0-B4A1-225AE0718AE8</key>
-		<string>../../../../../../..</string>
-		<key>CCE12000-3752-444B-8A67-C60AA11220EF</key>
-		<string>../../../../../addons/ofxSimpleSerial</string>
-		<key>D02FD482-5EAC-46E2-97F5-47402D29AEE3</key>
+		<key>1A676251-659E-497A-9B32-AF3EC17DAD09</key>
 		<string>../../../../../addons/ofxCsv</string>
+		<key>44ABB4FD-DE7E-4EDA-8761-1801C555C706</key>
+		<string>../../../../../addons/ofxJSON</string>
+		<key>68E86071-3D47-415E-9E89-96FA1BAE81E5</key>
+		<string>../../../../../addons/ofxSkyBox</string>
+		<key>70C82729-022D-4087-A570-D03E24933A3F</key>
+		<string>../../../../../../..</string>
+		<key>AF35746F-A448-4F82-82C1-FCC9B927D637</key>
+		<string>../..</string>
+		<key>D9C0AACF-B188-4070-812B-DA0DA0B8C89D</key>
+		<string>../../../../../addons/ofxSimpleSerial</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/harryhow/Keigibo-drawing.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>689A18B2-4523-43F0-B4A1-225AE0718AE8</string>
+	<string>70C82729-022D-4087-A570-D03E24933A3F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>689A18B2-4523-43F0-B4A1-225AE0718AE8</string>
+			<string>70C82729-022D-4087-A570-D03E24933A3F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MyProject</string>
 		</dict>
@@ -50,7 +58,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D02FD482-5EAC-46E2-97F5-47402D29AEE3</string>
+			<string>1A676251-659E-497A-9B32-AF3EC17DAD09</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxCsv</string>
 		</dict>
@@ -58,7 +66,15 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CCE12000-3752-444B-8A67-C60AA11220EF</string>
+			<string>44ABB4FD-DE7E-4EDA-8761-1801C555C706</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxJSON</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D9C0AACF-B188-4070-812B-DA0DA0B8C89D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxSimpleSerial</string>
 		</dict>
@@ -66,7 +82,15 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3C5EB9BF-B9CD-4D70-8042-AE1A265A7881</string>
+			<string>68E86071-3D47-415E-9E89-96FA1BAE81E5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSkyBox</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AF35746F-A448-4F82-82C1-FCC9B927D637</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ribbon</string>
 		</dict>
